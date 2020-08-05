@@ -1,0 +1,68 @@
+{{!< default}}
+
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+<div class="header">
+  <a href="https://rubyyagi.com"><h2 class="blog-title">{{@site.title}}</h2></a>
+  <p class="description">{{@site.description}}</p>
+</div>
+
+{{> "site-nav"}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+ <div class="post-header">
+      <h1 class="post-title">{{title}}</h1>
+      <div class="post-meta-wrapper">
+        {{#primary_author}}
+        <span>by {{name}}</span> <br/>
+        {{/primary_author}}
+        <time class="post-meta">{{date published_at format="D MMM YYYY"}} <br/> {{tags}} </time>
+      </div>
+    </div>
+    
+    <div class="post-content">
+        {{content}}
+    </div>
+
+    <!-- Hide post-subscribe -->
+
+
+    <div class="post-comment">
+      <div id="disqus_thread"></div>
+        <script>
+        
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = '{{url absolute="true"}}' ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'ghost-{{comment_id}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        var disqus_developer = 1;
+        s.src = 'https://rubyyagi.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+{{/post}}
+
+
+
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "highlight"}}
+    <!-- Hightlight JS -->
+    <link href="{{asset "css/highlightjs-tomorrow-night.css"}}" rel="stylesheet">
+    <script src="{{asset "js/highlight.pack.js"}}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{{/contentFor}}

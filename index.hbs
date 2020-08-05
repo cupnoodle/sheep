@@ -1,0 +1,29 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+<div class="header">
+  <a href="https://rubyyagi.com"><h2 class="blog-title">{{@site.title}}</h2></a>
+  <p class="description">{{@site.description}}</p>
+</div>
+
+{{> "site-nav"}}
+
+{{!-- The main content area --}}
+
+<div class="post-list-wrapper">
+	{{#is "tag"}}
+		{{#tag}}
+			<h1>{{name}}</h1>
+		{{/tag}}
+	{{/is}}
+
+    {{#foreach posts}}
+    <article class="post-list">
+        <time class="post-list-time">{{date published_at format="D MMM YYYY"}}</time>
+        <h2 class="post-list-title"><a href="{{url}}">{{title}}</a></h2>
+    </article>
+    {{/foreach}}
+
+    {{pagination}}
+</div>
