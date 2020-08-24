@@ -19,6 +19,8 @@
     {{!-- This tag outputs SEO meta+structured data and other important settings --}}
     {{ghost_head}}
 
+    <meta property="og:image" content="https://www.mugshotbot.com/m?url={{url absolute=true}}">
+    
     {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs. --}}
     {{{block "highlight"}}}
 
